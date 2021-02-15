@@ -6,6 +6,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,10 +15,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 @Transactional
 public class UserService implements UserDetailsService {
     private final UserDao userDao;
-    private final BCryptPasswordEncoder encoder;
+    private final PasswordEncoder encoder;
     static AccessDeniedException ACCESS_DENIED = new AccessDeniedException("Access denied");
 
-    public UserService(UserDao userDao, @Lazy BCryptPasswordEncoder encoder) {
+    public UserService(UserDao userDao, @Lazy PasswordEncoder encoder) {
         this.userDao = userDao;
         this.encoder = encoder;
     }

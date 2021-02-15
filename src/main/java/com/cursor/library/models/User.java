@@ -35,14 +35,16 @@ public class User implements UserDetails {
         return permissions.stream().map(r -> new SimpleGrantedAuthority(r.name())).collect(Collectors.toList());
     }
 
-    @Override
-    public String getUsername() {
-        return userName;
-    }
+
 
     @Override
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return userName;
     }
 
     @Override

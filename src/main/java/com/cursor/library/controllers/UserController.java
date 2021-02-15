@@ -21,10 +21,10 @@ public class UserController {
     private final JwtUtil jwtTokenUtil;
     private final AuthenticationManager authenticationManager;
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+   @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<String> createAuthenticationToken(@RequestBody AuthenticationRequest auth) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(auth.getUsername(), auth.getPassword()));
-        UserDetails userDetails = userService.login(auth.getUsername(), auth.getPassword());
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(auth.getUserName(), auth.getPassword()));
+        UserDetails userDetails = userService.login(auth.getUserName(), auth.getPassword());
         String jwt = jwtTokenUtil.generateToken(userDetails);
         return ResponseEntity.ok(jwt);
     }
@@ -36,7 +36,7 @@ public class UserController {
 
     @Data
     public static class AuthenticationRequest implements Serializable {
-        private String username;
+        private String userName;
         private String password;
     }
 }
