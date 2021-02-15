@@ -24,8 +24,9 @@ public class UserService implements UserDetailsService {
 
     public UserDetails login(String username, String password) {
         var user = userDao.findByUserName(username).orElseThrow(() -> ACCESS_DENIED);
-        if (!encoder.matches(password, user.getPassword()))
+        if (!encoder.matches(password, user.getPassword())) {
             throw ACCESS_DENIED;
+        }
         return user;
     }
 
